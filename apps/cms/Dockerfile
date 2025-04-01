@@ -32,9 +32,22 @@ RUN pnpm run build
 FROM base AS runner
 WORKDIR /app
 
+# Set environment variables for application
+
+ENV CI         true
+ARG DATABASE_URI
+ARG PAYLOAD_SECRET
+ARG NEXT_PUBLIC_SERVER_URL
+ARG CRON_SECRET
+ARG PREVIEW_SECRET
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
+ENV DATABASE_URI ${DATABASE_URI}
+ENV PAYLOAD_SECRET ${PAYLOAD_SECRET}
+ENV NEXT_PUBLIC_SERVER_URL ${NEXT_PUBLIC_SERVER_URL}
+ENV CRON_SECRET ${CRON_SECRET}
+ENV PREVIEW_SECRET ${PREVIEW_SECRET}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
