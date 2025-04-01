@@ -5,20 +5,7 @@ FROM node:22.12.0-alpine AS base
 RUN apk update && apk add --no-cache libc6-compat
 RUN npm install -g pnpm@10.3.0
 
-# Set environment variables for application
 
-ARG DATABASE_URI
-ARG PAYLOAD_SECRET
-ARG NEXT_PUBLIC_SERVER_URL
-ARG CRON_SECRET
-ARG PREVIEW_SECRET
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
-ENV DATABASE_URI ${DATABASE_URI}
-ENV PAYLOAD_SECRET ${PAYLOAD_SECRET}
-ENV NEXT_PUBLIC_SERVER_URL ${NEXT_PUBLIC_SERVER_URL}
-ENV CRON_SECRET ${CRON_SECRET}
-ENV PREVIEW_SECRET ${PREVIEW_SECRET}
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
@@ -41,6 +28,26 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
+# Set environment variables for application
+
+ARG DATABASE_URI
+ARG PAYLOAD_SECRET
+ARG NEXT_PUBLIC_SERVER_URL
+ARG CRON_SECRET
+ARG PREVIEW_SECRET
+# Uncomment the following line in case you want to disable telemetry during runtime.
+# ENV NEXT_TELEMETRY_DISABLED 1
+ENV DATABASE_URI ${DATABASE_URI}
+ENV PAYLOAD_SECRET ${PAYLOAD_SECRET}
+ENV NEXT_PUBLIC_SERVER_URL ${NEXT_PUBLIC_SERVER_URL}
+ENV CRON_SECRET ${CRON_SECRET}
+ENV PREVIEW_SECRET ${PREVIEW_SECRET}
+RUN echo -e "\e[1;33mENVIRONMENT VARIABLES\e[0m";
+# Create a .env file with all the environment variables but CI
+RUN env >> .env
+RUN cat .env
+RUN echo -e "\e[1;33mBuilding application\e[0m"
+# First install dependencies (as they change less often
 RUN pnpm run build
 
 # Production image, copy all the files and run next
