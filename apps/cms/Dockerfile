@@ -42,11 +42,6 @@ ENV PAYLOAD_SECRET ${PAYLOAD_SECRET}
 ENV NEXT_PUBLIC_SERVER_URL ${NEXT_PUBLIC_SERVER_URL}
 ENV CRON_SECRET ${CRON_SECRET}
 ENV PREVIEW_SECRET ${PREVIEW_SECRET}
-RUN echo -e "\e[1;33mENVIRONMENT VARIABLES\e[0m";
-# Create a .env file with all the environment variables but CI
-RUN env >> .env
-RUN cat .env
-RUN echo -e "\e[1;33mBuilding application\e[0m"
 # First install dependencies (as they change less often
 RUN pnpm run build
 
