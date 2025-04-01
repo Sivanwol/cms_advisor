@@ -4,6 +4,21 @@
 FROM node:22.12.0-alpine AS base
 RUN apk update && apk add --no-cache libc6-compat
 RUN npm install -g pnpm@10.3.0
+
+# Set environment variables for application
+
+ARG DATABASE_URI
+ARG PAYLOAD_SECRET
+ARG NEXT_PUBLIC_SERVER_URL
+ARG CRON_SECRET
+ARG PREVIEW_SECRET
+# Uncomment the following line in case you want to disable telemetry during runtime.
+# ENV NEXT_TELEMETRY_DISABLED 1
+ENV DATABASE_URI ${DATABASE_URI}
+ENV PAYLOAD_SECRET ${PAYLOAD_SECRET}
+ENV NEXT_PUBLIC_SERVER_URL ${NEXT_PUBLIC_SERVER_URL}
+ENV CRON_SECRET ${CRON_SECRET}
+ENV PREVIEW_SECRET ${PREVIEW_SECRET}
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
@@ -32,22 +47,6 @@ RUN pnpm run build
 FROM base AS runner
 WORKDIR /app
 
-# Set environment variables for application
-
-ENV CI         true
-ARG DATABASE_URI
-ARG PAYLOAD_SECRET
-ARG NEXT_PUBLIC_SERVER_URL
-ARG CRON_SECRET
-ARG PREVIEW_SECRET
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
-ENV DATABASE_URI ${DATABASE_URI}
-ENV PAYLOAD_SECRET ${PAYLOAD_SECRET}
-ENV NEXT_PUBLIC_SERVER_URL ${NEXT_PUBLIC_SERVER_URL}
-ENV CRON_SECRET ${CRON_SECRET}
-ENV PREVIEW_SECRET ${PREVIEW_SECRET}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
