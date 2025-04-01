@@ -18,8 +18,8 @@
     "generate:component": "turbo gen react-component"
   },
   "dependencies": {
-    "@repo/utils": "*",
-    "@repo/shared-ui": "*",
+    "@repo/utils": "workspace:*",
+    "@repo/shared-ui": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
@@ -45,8 +45,8 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@turbo/gen": "^2.4.4",
     "@types/node": "^20.11.24",
     "@types/react": "^19.0.10",

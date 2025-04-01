@@ -1,11 +1,12 @@
 {
-  "name": "cms-proj",
+  "name": "@repo/cms",
   "version": "1.0.0",
   "description": "Website template for Payload",
   "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+    "clean": "rm -fr .next .turbo node_modules dist",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "dev:prod": "cross-env NODE_OPTIONS=--no-deprecation rm -rf .next && pnpm build && pnpm start",

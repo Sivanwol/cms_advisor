@@ -37,8 +37,8 @@
     }
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "prettier": "^3.2.5",
     "prisma": "^6.5.0",
     "commitizen": "^4.3.0",
@@ -46,8 +46,8 @@
     "husky": "^9.0.11",
     "turbo": "^2.4.4"
   },
-  "packageManager": "yarn@1.2.2",
+  "packageManager": "pnpm@10.3.0",
   "engines": {
-    "node": ">=18"
+    "node": "^18.20.2 || >=20.9.0"
   }
 }

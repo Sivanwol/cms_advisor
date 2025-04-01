@@ -15,14 +15,14 @@
     "clean": "rm -fr .next .turbo node_modules dist"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.13.8",
     "eslint": "^9",
     "typescript": "^5.5.3"
   },
   "dependencies": {
-    "@repo/db": "*",
+    "@repo/db": "workspace:*",
     "@better-auth/utils": "^0.2.3",
     "better-auth": "^1.2.0",
     "better-auth-harmony": "^1.2.3"
