@@ -1,0 +1,38 @@
+{
+  "name": "@repo/db",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "prettier": "@repo/prettier",
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "clean": "rm -fr .next .turbo node_modules dist",
+    "clean:dist": "rm -fr dist",
+    "dev": "tsc -b --watch",
+    "build": "tsc",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev --skip-generate --create-only",
+    "db:seed": "prisma db seed --preview-feature",
+    "db:push": "prisma db push",
+    "db:pull": "prisma db pull",
+    "db:deploy": "prisma migrate deploy",
+    "db:reset": "prisma migrate reset",
+    "db:studio": "prisma studio",
+    "db:tunnel": "npx @prisma/ppg-tunnel --host 127.0.0.1 --port 52604"
+  },
+  "devDependencies": {
+    "@prisma/extension-accelerate": "^1.2.1",
+    "@prisma/extension-optimize": "^1.1.4",
+    "@prisma/extension-pulse": "^1.2.0",
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/node": "^22.13.8",
+    "eslint": "^9",
+    "prisma": "^6.5.0",
+    "typescript": "^5.5.3"
+  }
+}

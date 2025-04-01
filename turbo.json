@@ -1,0 +1,62 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
+  "ui": "tui",
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "dependsOn": [
+        "db:generate",
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "node_modules/.cache/tsbuildinfo.json",
+        "dist/**"
+      ]
+    },
+    "clean": {"cache": false},
+    "clean:dist": {"cache": false},
+    "format":  {"cache": false},
+    "lint":  {"cache": false},
+    "test": {},
+    "test:e2e": {},
+    "db:generate": {
+      "cache": false
+    },
+    "db:migrate": {
+      "cache": false,
+      "persistent": true,
+      "interactive": true
+    },
+    "db:push": {
+      "cache": false,
+      "interactive": true
+    },
+    "db:pull": {
+      "cache": false
+    },
+    "db:deploy": {
+      "cache": false
+    },
+    "db:seed": {
+      "cache": false
+    },
+    "db:studio": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:tunnel": {
+      "cache": false
+    },
+    "db:reset": {
+      "cache": false
+    }
+  }
+}

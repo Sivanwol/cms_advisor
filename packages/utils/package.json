@@ -1,0 +1,33 @@
+{
+  "name": "@repo/utils",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "dev": "tsc -b --watch",
+    "build": "tsc",
+    "clean:dist": "rm -fr dist",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "clean": "rm -fr .next .turbo node_modules dist"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/node": "^22.13.8",
+    "eslint": "^9",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@repo/db": "*",
+    "@better-auth/utils": "^0.2.3",
+    "better-auth": "^1.2.0",
+    "better-auth-harmony": "^1.2.3"
+  },
+  "peerDependencies": {
+    "prisma": "^6.5.0"
+  }
+}

@@ -1,0 +1,72 @@
+model User {
+    id          Int        @id @default(autoincrement())
+    externalId  String?    @unique @map("external_id")
+    companyId   Int?       @map("company_id")
+    Company     Companies? @relation(fields: [companyId], references: [id])
+    email       String?    @unique(map: "user_email_unique")
+    fullName    String?    @map("full_name")
+    phoneNumber String?    @unique(map: "user_phone_number_unique") @map("phone_number")
+
+    @@map("user")
+    @@index([companyId])
+}
+
+model Companies {
+    id            Int        @id @default(autoincrement())
+    name          String     @unique
+    address       String
+    isTransporter Boolean    @map("is_transporter")
+    User          User[]
+    Employee      Employee[]
+
+    @@map("companies")
+}
+
+model Driver {
+    id          Int        @id @default(autoincrement())
+    fullName    String     @map("full_name")
+    phoneNumber String     @unique(map: "driver_phone_number_unique") @map("phone_number")
+    address     String
+    latitude    Float?
+    longitude   Float?
+    pickupDate  DateTime?  @map("pickup_date")
+    OTP_Code    OTP_Code[]
+
+    @@map("driver")
+    DailyPickups DailyPickups[]
+}
+
+model Employee {
+    id          Int        @id @default(autoincrement())
+    companyId   Int?       @map("company_id")
+    Company     Companies? @relation(fields: [companyId], references: [id])
+    phoneNumber String?    @unique(map: "employee_phone_number_unique") @map("phone_number")
+    baseAddress String    @map("base_address")
+    address     String?
+    latitude    Float?
+    longitude   Float?
+    lastPickupDate  DateTime?  @map("pickup_date")
+    OTP_Code    OTP_Code[]
+
+    @@map("employee")
+    DailyPickupSelectedStationEmployees DailyPickupSelectedStationEmployees[]
+    @@index([companyId])
+    @@index([lastPickupDate])
+    @@index([baseAddress])
+}
+
+model OTP_Code {
+    id         Int  @id @default(autoincrement())
+    employeeId Int? @map("employee_id")
+
+    driverId  Int?      @map("driver_id")
+    code      String    @unique
+    expiresAt DateTime
+    createdAt DateTime  @default(now()) @map("created_at")
+    Driver    Driver?   @relation(fields: [driverId], references: [id])
+    Employee  Employee? @relation(fields: [employeeId], references: [id])
+
+    @@map("otp_code")
+    @@index([driverId])
+    @@index([employeeId])
+}

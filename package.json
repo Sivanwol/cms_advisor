@@ -1,0 +1,53 @@
+{
+  "name": "services-platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tooling/*"
+  ],
+  "scripts": {
+    "dev": " turbo watch dev --concurrency=20",
+    "build": " turbo run build",
+    "test": " turbo run test",
+    "test:e2e": " turbo run test:e2e",
+    "lint": " turbo run lint",
+    "clean": " turbo run clean && rm -fr .next .turbo node_modules dist",
+    "clean:dist": " turbo run clean:dist",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:migrate": " turbo -F @repo/db db:migrate",
+    "db:push": " turbo -F @repo/db db:push",
+    "db:studio": " turbo -F @repo/db db:studio",
+    "db:generate": " turbo -F @repo/db db:generate",
+    "db:seed": " turbo -F @repo/db db:seed",
+    "db:deploy": " turbo -F @repo/db db:deploy",
+    "db:tunnel": " turbo -F @repo/db db:tunnel",
+    "db:reset": " turbo -F @repo/db db:reset",
+    "uuid": "openssl rand -base64 32",
+    "generateSecret": "node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\""
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts,css,less,scss,sass}": [
+      "prettier --write --no-error-on-unmatched-pattern"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "prettier": "^3.2.5",
+    "prisma": "^6.5.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^9.0.11",
+    "turbo": "^2.4.4"
+  },
+  "packageManager": "yarn@1.2.2",
+  "engines": {
+    "node": ">=18"
+  }
+}
