@@ -96,14 +96,9 @@ export const seed = async ({
   ])
 
   const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
-    payload.create({
+    payload.findByID({
       collection: 'users',
-      data: {
-        name: 'Demo Author',
-        email: 'demo-author@example.com',
-        //  @ts-ignore
-        password: 'password',
-      },
+      id: 'c727b122-d7a1-4ab8-8235-aef0e661191d',
     }),
     payload.create({
       collection: 'media',
