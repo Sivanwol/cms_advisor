@@ -11,6 +11,9 @@ import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
+
+import { authjsPlugin } from "payload-authjs";
+import { authConfig } from "./auth.config";
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
@@ -91,4 +94,8 @@ export const plugins: Plugin[] = [
     },
   }),
   payloadCloudPlugin(),
+
+  authjsPlugin({
+    authjsConfig: authConfig,
+  }),
 ]
