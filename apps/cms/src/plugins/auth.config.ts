@@ -3,7 +3,7 @@ import KeycloakProvider from "next-auth/providers/keycloak";
 
 export const authConfig: NextAuthConfig = {
     pages: {
-        signIn: "/auth/signin",
+        signIn: "/admin/signin",
     },
     providers: [
         KeycloakProvider({

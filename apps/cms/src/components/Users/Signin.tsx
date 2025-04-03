@@ -9,7 +9,8 @@ export function Signin() {
     if (status === "unauthenticated") {
         console.log("No JWT");
         console.log(status);
-        void signIn("keycloak");
+        void signIn("keycloak", {
+            callbackUrl: "/admin",});
     } else if (status === "authenticated") {
         void router.push("/");
     }
