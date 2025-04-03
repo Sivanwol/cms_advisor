@@ -2,6 +2,9 @@ import { NextAuthConfig } from "next-auth";
 import KeycloakProvider from "next-auth/providers/keycloak";
 
 export const authConfig: NextAuthConfig = {
+    pages: {
+        signIn: "/auth/signin",
+    },
     providers: [
         KeycloakProvider({
             clientId: process.env.KEYCLOAK_ID,
