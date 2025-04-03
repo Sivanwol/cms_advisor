@@ -10,7 +10,7 @@ export default function Signin() {
     if (status === "unauthenticated") {
       console.log("No JWT");
       console.log(status);
-      void signIn("okta");
+      void signIn("keycloak");
     } else if (status === "authenticated") {
       void router.push("/");
     }
